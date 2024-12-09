@@ -23,3 +23,10 @@ Invoke-WebRequest -Uri http://127.0.0.1:8080/api/stock `
 >>     -Headers @{ "Content-Type" = "application/json" } `
 >>     -Body '{"name": "Company Stock Name", "startDate": "2024-01-01", "endDate": "2024-12-31"}'
 ```
+
+
+### Import data from .csv files
+The 'data' is a folder name where csv files are stored. You can import it from other path.
+```sh
+php bin/console app:import-csv data
+```
