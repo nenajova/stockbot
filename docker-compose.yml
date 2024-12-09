@@ -8,10 +8,9 @@ services:
     volumes:
       - .:/var/www/html
     environment:
-      DATABASE_URL: "mysql://root:root_password@mysql:3306/stockbot?serverVersion=8.0&charset=utf8mb4"
+      DATABASE_URL: "mysql://root:root_password@mysql:3307/stockbot"
     depends_on:
       - mysql
-    restart: always
 
   mysql:
     platform: linux/x86_64
@@ -19,3 +18,5 @@ services:
     environment:
       MYSQL_DATABASE: stockbot
       MYSQL_ROOT_PASSWORD: root_password
+    ports:
+      - "3307:3306"

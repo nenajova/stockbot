@@ -25,6 +25,11 @@ EXPOSE 80
 RUN sed -i 's!/var/www/html!/var/www/html/public!g' \
 /etc/apache2/sites-available/000-default.conf
 
-CMD [ "apache2-foreground" ]
+# RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
 
-ENTRYPOINT ["sh", "./entrypoint.sh"]
+RUN chmod +x ./entrypoint.sh
+
+ENTRYPOINT ["./entrypoint.sh"]
+
+# CMD [ "apache2-foreground" ]
+
