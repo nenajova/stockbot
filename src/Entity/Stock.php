@@ -31,8 +31,12 @@ class Stock
     #[ORM\Column(type: 'float')]
     private $adjClose;
 
-    #[ORM\Column(type: 'integer')]
+    #[ORM\Column(type: 'bigint')]
     private $volume;
+
+    #[ORM\ManyToOne(targetEntity: Company::class, inversedBy: 'stock1s')]
+    #[ORM\JoinColumn(nullable: false)]
+    private $Company;
 
     public function getId(): ?int
     {
@@ -111,14 +115,26 @@ class Stock
         return $this;
     }
 
-    public function getVolume(): ?int
+    public function getVolume(): ?string
     {
         return $this->volume;
     }
 
-    public function setVolume(int $volume): self
+    public function setVolume(string $volume): self
     {
         $this->volume = $volume;
+
+        return $this;
+    }
+
+    public function getCompany(): ?Company
+    {
+        return $this->Company;
+    }
+
+    public function setCompany(?Company $Company): self
+    {
+        $this->Company = $Company;
 
         return $this;
     }
