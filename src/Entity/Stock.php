@@ -34,7 +34,7 @@ class Stock
     #[ORM\Column(type: 'bigint')]
     private $volume;
 
-    #[ORM\ManyToOne(targetEntity: Company::class, inversedBy: 'stock1s')]
+    #[ORM\ManyToOne(targetEntity: Company::class, inversedBy: 'stocks')]
     #[ORM\JoinColumn(nullable: false)]
     private $Company;
 

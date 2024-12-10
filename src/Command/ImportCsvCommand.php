@@ -27,13 +27,9 @@ class ImportCsvCommand extends Command
         parent::__construct();
     }
 
-
     protected function configure(): void
     {
-        $this
-            ->addArgument('folder', InputArgument::REQUIRED, 'path to the file');
-
-        ;
+        $this->addArgument('folder', InputArgument::REQUIRED, 'path to the file');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
@@ -60,11 +56,11 @@ class ImportCsvCommand extends Command
         $io->section("Found " . count($files) . " csv files in folder '$folder':");
 
 
-        $repository = $this->entityManager->getRepository(Company::class);
+        $companyRepository = $this->entityManager->getRepository(Company::class);
 
         foreach ($files as $index =>  $file) {
 
-            $company =  $repository->findOneBy(['name' => pathinfo($file, PATHINFO_FILENAME)]);
+            $company =  $companyRepository->findOneBy(['name' => pathinfo($file, PATHINFO_FILENAME)]);
 
             if (empty($company)) {
                 continue;
