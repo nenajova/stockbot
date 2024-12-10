@@ -9,6 +9,7 @@ class Period
     private Price $bestToBuy;
     private Price $bestToSell;
     private int $daysCount;
+    private float $profit;
 
     public function __construct(
         private readonly array $stockPrices
@@ -48,8 +49,7 @@ class Period
         $this->startDate = $startDate['date'];
         $this->endDate = $endDate['date'];
         $this->daysCount = count($this->stockPrices);
-
-
+        $this->profit = $this->bestToSell->getPrice() - $this->bestToBuy->getPrice();
     }
 
     public function getBestToBuy()
@@ -75,5 +75,10 @@ class Period
     public function getDaysCount()
     {
         return $this->daysCount;
+    }
+
+    public function getProfit()
+    {
+        return $this->profit;
     }
 }

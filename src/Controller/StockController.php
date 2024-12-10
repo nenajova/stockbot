@@ -80,7 +80,8 @@ class StockController extends AbstractController
                 'bestToSell' => [
                     'date' => $mainPeriod->getBestToSell()->getDate()->format('m.d.Y'),
                     'price' => $mainPeriod->getBestToSell()->getPrice()
-                ]
+                ],
+                'profit' => $mainPeriod->getProfit()
             ],
             'previousPeriod' => [
                 'startDate' => $previousPeriod->getStartDate()->format('m.d.Y'),
@@ -93,7 +94,8 @@ class StockController extends AbstractController
                 'bestToSell' => [
                     'date' => $previousPeriod->getBestToSell()->getDate()->format('m.d.Y'),
                     'price' => $previousPeriod->getBestToSell()->getPrice()
-                ]
+                ],
+                'profit' => $previousPeriod->getProfit()
             ],
             'nextPeriod' => [
                 'startDate' => $nextPeriod->getStartDate()->format('m.d.Y'),
@@ -106,7 +108,8 @@ class StockController extends AbstractController
                 'bestToSell' => [
                     'date' => $nextPeriod->getBestToSell()->getDate()->format('m.d.Y'),
                     'price' => $nextPeriod->getBestToSell()->getPrice()
-                ]
+                ],
+                'profit' => $nextPeriod->getProfit()
             ]
         ];
 
