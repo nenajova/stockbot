@@ -39,20 +39,61 @@ class StockRepository extends ServiceEntityRepository
         }
     }
 
-//    /**
-//     * @return Stock[] Returns an array of Stock objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('s')
-//            ->andWhere('s.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('s.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+   /**
+    * @return Stock[] Returns an array of Stock objects
+    */
+   public function findByCompanyAndDates($companyId, $startDate, $endDate): array
+   {
+        $mainPeriod = $this->createQueryBuilder('s')
+            ->innerJoin('s.Company', 'c')
+            ->where('c.id = :companyId')
+            ->setParameter('companyId', $companyId)
+
+            ->andWhere('s.date >= :startDate')
+            ->setParameter('startDate', $startDate)
+            
+            ->andWhere('s.date <= :endDate')
+            ->setParameter('endDate', $endDate)
+            
+            ->orderBy('s.id', 'ASC')
+            ->getQuery()
+            ->getArrayResult()
+        ;
+
+        $daysCount = count($mainPeriod);
+
+        $previousPeriod = $this->createQueryBuilder('s')
+            ->innerJoin('s.Company', 'c')
+            ->where('c.id = :companyId')
+            ->setParameter('companyId', $companyId)
+
+            ->andWhere('s.date < :startDate')
+            ->setParameter('startDate', $startDate)
+            
+            ->orderBy('s.id', 'DESC')
+            ->setMaxResults($daysCount)
+            ->getQuery()
+            ->getArrayResult();
+
+        $nextPeriod = $this->createQueryBuilder('s')
+            ->innerJoin('s.Company', 'c')
+            ->where('c.id = :companyId')
+            ->setParameter('companyId', $companyId)
+
+            ->andWhere('s.date > :endDate')
+            ->setParameter('endDate', $endDate)
+            
+            ->orderBy('s.id', 'ASC')
+            ->setMaxResults($daysCount)
+            ->getQuery()
+            ->getArrayResult();
+
+        return [
+            'main_period' => $mainPeriod,
+            'previous_period' => $previousPeriod,
+            'next_period' => $nextPeriod,
+        ];
+   }
 
 //    public function findOneBySomeField($value): ?Stock
 //    {
