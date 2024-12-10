@@ -8,6 +8,15 @@ Docker (port:8080)
 ```sh
 docker compose up
 ```
+Note: Currently, in the docker environment, the import does not work, so it has to be started manually with two commands.
+```sh
+php bin/console doctrine:migrations:migrate
+php bin/console app:import-csv data
+```
+Before that logs into container with:
+```sh
+docker exec -it stockbot-web-1 bash
+```
 
 ### CURL test
 ```sh
