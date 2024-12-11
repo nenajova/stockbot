@@ -81,7 +81,12 @@ class StockController extends AbstractController
                     'date' => $mainPeriod->getBestToSell()->getDate()->format('m.d.Y'),
                     'price' => $mainPeriod->getBestToSell()->getPrice()
                 ],
-                'profit' => $mainPeriod->getProfit()
+                'profit' => $mainPeriod->getProfit(),
+                'trendChanged' => $mainPeriod->getTrendChangeCount(),
+                'periodProfit' => $mainPeriod->getPeriodProfit()->getProfit(),
+                'transactionCount' => $mainPeriod->getPeriodProfit()->getTransactionCounter(),
+                'transactions' => $mainPeriod->getPeriodProfit()->getTransactionToString(),
+
             ],
             'previousPeriod' => [
                 'startDate' => $previousPeriod->getStartDate()->format('m.d.Y'),
@@ -95,7 +100,11 @@ class StockController extends AbstractController
                     'date' => $previousPeriod->getBestToSell()->getDate()->format('m.d.Y'),
                     'price' => $previousPeriod->getBestToSell()->getPrice()
                 ],
-                'profit' => $previousPeriod->getProfit()
+                'profit' => $previousPeriod->getProfit(),
+                'trendChanged' => $previousPeriod->getTrendChangeCount(),
+                'periodProfit' => $previousPeriod->getPeriodProfit()->getProfit(),
+                'transactionCount' => $previousPeriod->getPeriodProfit()->getTransactionCounter(),
+                'transactions' => $previousPeriod->getPeriodProfit()->getTransactionToString(),
             ],
             'nextPeriod' => [
                 'startDate' => $nextPeriod->getStartDate()->format('m.d.Y'),
@@ -109,7 +118,11 @@ class StockController extends AbstractController
                     'date' => $nextPeriod->getBestToSell()->getDate()->format('m.d.Y'),
                     'price' => $nextPeriod->getBestToSell()->getPrice()
                 ],
-                'profit' => $nextPeriod->getProfit()
+                'profit' => $nextPeriod->getProfit(),
+                'trendChanged' => $nextPeriod->getTrendChangeCount(),
+                'periodProfit' => $nextPeriod->getPeriodProfit()->getProfit(),
+                'transactionCount' => $nextPeriod->getPeriodProfit()->getTransactionCounter(),
+                'transactions' => $nextPeriod->getPeriodProfit()->getTransactionToString(),
             ]
         ];
 
